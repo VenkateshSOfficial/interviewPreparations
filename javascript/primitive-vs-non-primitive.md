@@ -266,7 +266,75 @@ console.log(typeof objectText);    // "object"
 
 Prefer primitive literals such as `"hello"`, `42`, and `true` over `new String()`, `new Number()`, and `new Boolean()`.
 
-## 10. `null` vs `undefined`
+## 10. Type Coercion and Falsy Values
+
+JavaScript may automatically convert a value from one type to another. This is called **implicit type coercion** and is a frequent interview topic.
+
+```js
+console.log("5" + 3);         // "53"  (string concatenation)
+console.log("5" - 3);         // 2     (string converted to number)
+console.log(true + 1);         // 2     (true converts to 1)
+console.log(null + 1);         // 1     (null converts to 0)
+console.log(undefined + 1);    // NaN
+```
+
+Prefer explicit conversion when intent matters:
+
+```js
+console.log(Number("42"));  // 42
+console.log(String(99));      // "99"
+console.log(Boolean(0));      // false
+console.log(Boolean("hello")); // true
+```
+
+The falsy primitive values are `false`, `0`, `-0`, `0n`, `""`, `null`, `undefined`, and `NaN`. Every object is truthy, including empty arrays and empty objects.
+
+```js
+console.log(Boolean([])); // true
+console.log(Boolean({})); // true
+```
+
+> Interview tip: Prefer `===` to `==`. Loose equality performs coercion, which can produce surprising results such as `"5" == 5` being `true`.
+
+## 11. Copying Objects: Shallow vs Deep Copy
+
+Assignment does not copy an object; it shares its reference. Create a clone when an independent object is required.
+
+```js
+const original = { name: "Ada", role: "Engineer" };
+const copy = { ...original };
+
+copy.name = "Grace";
+
+console.log(original.name); // "Ada"
+console.log(copy.name);     // "Grace"
+```
+
+Object spread and `Object.assign()` create **shallow copies**. Top-level properties are copied, but nested objects are still shared.
+
+```js
+const original = { profile: { city: "London" } };
+const shallowCopy = { ...original };
+
+shallowCopy.profile.city = "Paris";
+
+console.log(original.profile.city); // "Paris"
+```
+
+For many modern JavaScript environments, use `structuredClone()` for a deep copy of supported data:
+
+```js
+const original = { profile: { city: "London" } };
+const deepCopy = structuredClone(original);
+
+deepCopy.profile.city = "Paris";
+
+console.log(original.profile.city); // "London"
+```
+
+`JSON.parse(JSON.stringify(value))` is sometimes used for JSON-only data, but it loses or changes values such as `undefined`, `Symbol`, functions, `Date`, `Map`, `Set`, `Infinity`, and circular references. It is not a universal deep-cloning solution.
+
+## 12. `null` vs `undefined`
 
 Both represent absence of a useful value, but their intent differs.
 
@@ -281,7 +349,7 @@ console.log(notAssigned);  // undefined
 console.log(selectedUser); // null
 ```
 
-## 11. Memory Model: A Careful Interview Explanation
+## 13. Memory Model: A Careful Interview Explanation
 
 A simplified model is useful:
 
@@ -291,7 +359,7 @@ A simplified model is useful:
 
 Avoid claiming exact memory layout details, such as "primitives are always stored on the stack and objects are always stored on the heap." JavaScript engines can optimize storage differently. The reliable language-level behavior is value copying for primitives and reference-value copying for objects.
 
-## 12. Common Interview Questions and Answers
+## 14. Common Interview Questions and Answers
 
 ### Q1. What are the primitive data types in JavaScript?
 
@@ -321,7 +389,15 @@ Avoid claiming exact memory layout details, such as "primitives are always store
 
 **Answer:** It is a historical JavaScript bug preserved for compatibility. `null` is still a primitive value.
 
-## 13. Quick Comparison Table
+### Q8. What is the difference between a shallow copy and a deep copy?
+
+**Answer:** A shallow copy duplicates only the top-level object. Nested objects retain their shared references. A deep copy duplicates nested data too, so changes to the nested values do not affect the original object.
+
+### Q9. Are empty arrays and objects falsy?
+
+**Answer:** No. `[]` and `{}` are objects, and all objects are truthy in JavaScript.
+
+## 15. Quick Comparison Table
 
 | Feature | Primitive | Non-Primitive |
 | --- | --- | --- |
@@ -332,7 +408,7 @@ Avoid claiming exact memory layout details, such as "primitives are always store
 | `===` behavior | Compares value and type | Compares object identity |
 | Common `typeof` result | `"string"`, `"number"`, etc. | Usually `"object"`; functions are `"function"` |
 
-## 14. Strong Interview Summary
+## 16. Strong Interview Summary
 
 > Primitive values are immutable and are copied directly during assignment or argument passing. Non-primitive values are objects. JavaScript still passes them by value, but the copied value is an object reference, so multiple variables or function parameters can mutate the same object. Strict equality compares primitive values by value and objects by identity.
 
