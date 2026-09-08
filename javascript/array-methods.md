@@ -294,7 +294,14 @@ These methods execute a function for each array element.
 ```javascript
 const arr = [1, 2, 3];
 
-arr.forEach((element, index, array) => {
+// Only element (most common)
+arr.forEach(element => {
+  console.log(element);
+});
+// Output: 1, 2, 3
+
+// With index (optional)
+arr.forEach((element, index) => {
   console.log(`${index}: ${element}`);
 });
 // Output:
