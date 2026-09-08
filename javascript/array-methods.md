@@ -32,6 +32,7 @@ console.log(arr);     // [1, 2, 3, 4, 5]
 console.log(length);  // 5 (returns new length)
 ```
 
+**Returns:** Number (new length of the array)
 **Use case:** Adding new elements to the end of an array
 
 ### 2. pop() - Remove from End
@@ -44,6 +45,7 @@ console.log(arr);      // [1, 2, 3, 4]
 console.log(removed);  // 5 (returns removed element)
 ```
 
+**Returns:** Element removed, or undefined if array is empty
 **Use case:** Removing the last element (like a stack)
 
 ### 3. unshift() - Add to Beginning
@@ -56,6 +58,7 @@ console.log(arr);     // [0, 1, 2, 3, 4]
 console.log(length);  // 5 (returns new length)
 ```
 
+**Returns:** Number (new length of the array)
 **Use case:** Adding elements to the start of an array
 
 ### 4. shift() - Remove from Beginning
@@ -68,6 +71,7 @@ console.log(arr);      // [2, 3, 4, 5]
 console.log(removed);  // 1 (returns removed element)
 ```
 
+**Returns:** Element removed, or undefined if array is empty
 **Use case:** Removing the first element (like a queue)
 
 ### 5. splice() - Add/Remove at Any Position
@@ -91,6 +95,7 @@ arr3.splice(1, 0, 'x', 'y');
 console.log(arr3);    // [1, 'x', 'y', 2, 3]
 ```
 
+**Returns:** Array of removed elements
 **Use case:** Complex array manipulation (add/remove at specific index)
 
 ### 6. reverse() - Reverse Array
@@ -102,6 +107,7 @@ arr.reverse();
 console.log(arr); // [5, 4, 3, 2, 1]
 ```
 
+**Returns:** The reversed array (same array reference)
 **Use case:** Reversing the order of elements
 
 ### 7. sort() - Sort Array
@@ -138,6 +144,7 @@ console.log(users);
 // [{ name: 'Jane', age: 25 }, { name: 'John', age: 30 }, { name: 'Bob', age: 35 }]
 ```
 
+**Returns:** The sorted array (same array reference)
 **Use case:** Sorting arrays in various orders
 
 ### 8. fill() - Fill Array with Value
@@ -154,6 +161,7 @@ arr2.fill(9);
 console.log(arr2); // [9, 9, 9, 9, 9]
 ```
 
+**Returns:** The modified array (same array reference)
 **Use case:** Initializing or resetting array values
 
 ### 9. copyWithin() - Copy Elements Within Array
@@ -165,6 +173,7 @@ arr.copyWithin(0, 3, 5); // Copy elements from index 3-5 to start at index 0
 console.log(arr); // [4, 5, 3, 4, 5]
 ```
 
+**Returns:** The modified array (same array reference)
 **Use case:** Copying array sections to different positions (rarely used)
 
 ---
@@ -193,6 +202,7 @@ console.log(copy);                    // [1, 2, 3, 4, 5]
 console.log(arr);                     // [1, 2, 3, 4, 5] (unchanged)
 ```
 
+**Returns:** New array with selected elements
 **Use case:** Getting a portion of an array without modifying original
 
 ### 2. concat() - Combine Arrays
@@ -208,6 +218,7 @@ console.log(combined); // [1, 2, 3, 4, 5, 6, 7, 8]
 console.log(arr1);     // [1, 2] (unchanged)
 ```
 
+**Returns:** New array with combined elements
 **Use case:** Combining multiple arrays without modifying originals
 
 ### 3. join() - Convert Array to String
@@ -227,6 +238,7 @@ console.log(str3);             // 'applebananacharry'
 console.log(arr);              // ['apple', 'banana', 'cherry'] (unchanged)
 ```
 
+**Returns:** String
 **Use case:** Converting array to formatted string
 
 ### 4. flat() - Flatten Nested Arrays
@@ -246,6 +258,7 @@ console.log(flat3);            // [1, 2, 3, 4, 5, 6]
 console.log(arr1);             // [1, 2, [3, 4, [5, 6]]] (unchanged)
 ```
 
+**Returns:** New flattened array
 **Use case:** Flattening nested arrays to single level
 
 ### 5. flatMap() - Map and Flatten
@@ -267,6 +280,7 @@ const words = sentences.flatMap(sentence => sentence.split(' '));
 console.log(words); // ['Hello', 'world', 'How', 'are', 'you']
 ```
 
+**Returns:** New flattened and mapped array
 **Use case:** Combining map and flatten operations
 
 ---
@@ -299,6 +313,7 @@ users.forEach(user => {
 });
 ```
 
+**Returns:** undefined
 **Use case:** Performing side effects (like logging, updating DOM)
 
 ### 2. map() - Transform Each Element
@@ -324,6 +339,7 @@ const strings = numbers.map(String);
 console.log(strings); // ['1', '2', '3', '4']
 ```
 
+**Returns:** New array with transformed elements
 **Use case:** Transforming array elements
 
 ### 3. filter() - Keep Elements Matching Condition
@@ -354,6 +370,7 @@ const cleaned = mixed.filter(Boolean);
 console.log(cleaned); // [1, 2, 3]
 ```
 
+**Returns:** New array with filtered elements
 **Use case:** Selecting elements that meet criteria
 
 ### 4. reduce() - Combine Elements into Single Value
@@ -394,6 +411,7 @@ const userMap = users.reduce((acc, user) => {
 console.log(userMap); // { '1': 'John', '2': 'Jane' }
 ```
 
+**Returns:** Single aggregated value (any type)
 **Use case:** Aggregating array data into single value
 
 ### 5. reduceRight() - Reduce from Right to Left
@@ -414,6 +432,7 @@ const reversed = arr.reduceRight((acc, current) => {
 console.log(reversed); // [4, 3, 2, 1]
 ```
 
+**Returns:** Single aggregated value (any type)
 **Use case:** Processing array from right to left
 
 ### 6. every() - Check if All Match Condition
@@ -438,6 +457,7 @@ const allOver30 = users.every(user => user.age > 30);
 console.log(allOver30); // false
 ```
 
+**Returns:** Boolean (true if all elements pass test)
 **Use case:** Validating that all elements meet criteria
 
 ### 7. some() - Check if Any Match Condition
@@ -459,6 +479,7 @@ const hasAdmin = users.some(user => user.isAdmin);
 console.log(hasAdmin); // true
 ```
 
+**Returns:** Boolean (true if any element passes test)
 **Use case:** Checking if any element meets criteria
 
 ---
@@ -489,6 +510,7 @@ if (arr.includes(30)) {
 }
 ```
 
+**Returns:** Number (index of element, or -1 if not found)
 **Use case:** Finding position of element
 
 ### 2. lastIndexOf() - Find Index of Last Match
@@ -500,6 +522,7 @@ const lastIndex = arr.lastIndexOf(20);  // 3 (last occurrence)
 console.log(lastIndex); // 3
 ```
 
+**Returns:** Number (index of last occurrence, or -1 if not found)
 **Use case:** Finding last occurrence of element
 
 ### 3. includes() - Check if Element Exists
@@ -523,6 +546,7 @@ console.log(arr2.includes(NaN));   // true (works!)
 console.log(arr.includes(2, 2));   // false (search from index 2)
 ```
 
+**Returns:** Boolean (true if element found)
 **Use case:** Checking element existence
 
 ### 4. find() - Find First Element Matching Condition
@@ -546,6 +570,7 @@ const found = arr.find(element => element > 10);
 console.log(found); // 12
 ```
 
+**Returns:** First element matching condition, or undefined if none found
 **Use case:** Finding first element matching criteria
 
 ### 5. findIndex() - Find Index of Element Matching Condition
@@ -569,6 +594,7 @@ const index2 = arr.findIndex(element => element > 10);
 console.log(index2); // 1 (12 is at index 1)
 ```
 
+**Returns:** Number (index of element matching condition, or -1 if not found)
 **Use case:** Finding index of element matching criteria
 
 ### 6. findLast() - Find Last Element Matching Condition (ES2023)
@@ -580,6 +606,7 @@ const found = arr.findLast(element => element > 10);
 console.log(found); // 15 (last element > 10)
 ```
 
+**Returns:** Last element matching condition, or undefined if none found
 **Use case:** Finding last element matching criteria
 
 ### 7. findLastIndex() - Find Index of Last Element Matching (ES2023)
@@ -591,6 +618,7 @@ const index = arr.findLastIndex(element => element > 10);
 console.log(index); // 5 (index of 15)
 ```
 
+**Returns:** Number (index of last element matching condition, or -1 if not found)
 **Use case:** Finding index of last matching element
 
 ---
@@ -620,6 +648,7 @@ const arr4 = Array.from([1, 2, 3], x => x * 2);
 console.log(arr4); // [2, 4, 6]
 ```
 
+**Returns:** New Array from iterable
 **Use case:** Converting iterables to arrays
 
 ### 2. Array.isArray() - Check if Array
@@ -631,6 +660,7 @@ console.log(Array.isArray({ length: 0 })); // false
 console.log(Array.isArray(null));          // false
 ```
 
+**Returns:** Boolean (true if value is an array)
 **Use case:** Type checking for arrays
 
 ### 3. Array.of() - Create Array from Arguments
@@ -647,6 +677,7 @@ console.log(new Array(5));      // [empty × 5] (5 empty slots)
 console.log(Array.of(5));       // [5] (array with single element)
 ```
 
+**Returns:** New Array containing all arguments
 **Use case:** Creating arrays reliably
 
 ---
@@ -666,6 +697,7 @@ console.log(arr.at(-2));   // 'c' (second to last)
 console.log(arr[arr.length - 1]); // 'd'
 ```
 
+**Returns:** Element at the specified index
 **Use case:** Accessing elements with negative indices
 
 ### 2. length Property
@@ -682,6 +714,7 @@ arr.length = 0;
 console.log(arr); // [] (cleared)
 ```
 
+**Returns:** Number (length of array)
 **Use case:** Getting/setting array size
 
 ---
@@ -699,6 +732,7 @@ const nested = [1, [2, 3], 4];
 console.log(nested.toString()); // '1,2,3,4'
 ```
 
+**Returns:** String representation of array
 **Use case:** String representation of array
 
 ### 2. toLocaleString() - Localized String
@@ -712,6 +746,7 @@ console.log(prices.toLocaleString('de-DE', {
 // Output depends on locale
 ```
 
+**Returns:** Localized string representation of array
 **Use case:** Locale-specific string representation
 
 ---
