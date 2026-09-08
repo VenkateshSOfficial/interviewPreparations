@@ -6,6 +6,259 @@ Objects are fundamental to JavaScript. Object methods are built-in functions tha
 
 ---
 
+## What are Objects?
+
+### Definition
+
+An **object** is a collection of **key-value pairs** (also called properties). Objects are used to store related data and functionality together. They are one of the most important data structures in JavaScript.
+
+### Simple Analogy
+
+Think of an object like a real-world object (e.g., a person):
+- A person has **properties**: name, age, email, address
+- A person has **methods** (actions): walk, talk, eat, sleep
+
+### Basic Syntax
+
+```javascript
+const objectName = {
+  propertyName: propertyValue,
+  methodName: function() { /* code */ }
+};
+```
+
+### Example 1: Simple Object
+
+```javascript
+// Creating a simple object
+const person = {
+  name: 'John',
+  age: 30,
+  email: 'john@example.com',
+  city: 'New York'
+};
+
+// Accessing properties
+console.log(person.name);   // 'John'
+console.log(person['age']); // 30
+console.log(person.email);  // 'john@example.com'
+```
+
+### Example 2: Object with Methods
+
+```javascript
+// Object with methods (functions)
+const person = {
+  name: 'John',
+  age: 30,
+  
+  // Method 1
+  greet: function() {
+    return `Hello, my name is ${this.name}`;
+  },
+  
+  // Method 2 (shorter syntax)
+  haveBirthday() {
+    this.age = this.age + 1;
+    return `Happy birthday! Now ${this.age} years old`;
+  }
+};
+
+console.log(person.greet());      // 'Hello, my name is John'
+console.log(person.haveBirthday()); // 'Happy birthday! Now 31 years old'
+console.log(person.age);           // 31
+```
+
+### Example 3: Different Ways to Create Objects
+
+```javascript
+// Method 1: Object Literal (most common)
+const obj1 = {
+  name: 'John',
+  age: 30
+};
+
+// Method 2: Constructor Function
+function Person(name, age) {
+  this.name = name;
+  this.age = age;
+}
+const obj2 = new Person('Jane', 25);
+
+// Method 3: Class (ES6+)
+class User {
+  constructor(name, age) {
+    this.name = name;
+    this.age = age;
+  }
+}
+const obj3 = new User('Bob', 35);
+
+// Method 4: Object.create()
+const obj4 = Object.create(null);
+obj4.name = 'Alice';
+obj4.age = 28;
+
+console.log(obj1); // { name: 'John', age: 30 }
+console.log(obj2); // Person { name: 'Jane', age: 25 }
+console.log(obj3); // User { name: 'Bob', age: 35 }
+console.log(obj4); // { name: 'Alice', age: 28 }
+```
+
+### Example 4: Accessing and Modifying Properties
+
+```javascript
+const car = {
+  brand: 'Toyota',
+  model: 'Camry',
+  year: 2020
+};
+
+// Access property
+console.log(car.brand);      // 'Toyota'
+console.log(car['model']);   // 'Camry'
+
+// Modify existing property
+car.year = 2021;
+console.log(car.year);       // 2021
+
+// Add new property
+car.color = 'Blue';
+console.log(car.color);      // 'Blue'
+
+// Delete property
+delete car.year;
+console.log(car.year);       // undefined
+
+console.log(car);
+// { brand: 'Toyota', model: 'Camry', color: 'Blue' }
+```
+
+### Example 5: Nested Objects
+
+```javascript
+// Objects can contain other objects
+const company = {
+  name: 'Tech Corp',
+  location: {
+    city: 'San Francisco',
+    country: 'USA'
+  },
+  employees: [
+    { id: 1, name: 'John' },
+    { id: 2, name: 'Jane' }
+  ]
+};
+
+// Accessing nested properties
+console.log(company.name);                    // 'Tech Corp'
+console.log(company.location.city);           // 'San Francisco'
+console.log(company.employees[0].name);       // 'John'
+```
+
+### Example 6: Object Properties vs Variables
+
+```javascript
+// Property stored in object
+const person = {
+  name: 'John'
+};
+
+// Regular variable
+let name = 'Jane';
+
+// Different!
+console.log(person.name);  // 'John' (object property)
+console.log(name);         // 'Jane' (variable)
+
+// Objects are passed by reference
+const person1 = { name: 'John' };
+const person2 = person1;
+person2.name = 'Jane';
+
+console.log(person1.name); // 'Jane' (changed!)
+console.log(person2.name); // 'Jane'
+console.log(person1 === person2); // true (same object)
+
+// Primitive values are passed by value
+let num1 = 5;
+let num2 = num1;
+num2 = 10;
+
+console.log(num1); // 5 (unchanged)
+console.log(num2); // 10
+```
+
+### Object Property Types
+
+```javascript
+const obj = {
+  // String property
+  name: 'John',
+  
+  // Number property
+  age: 30,
+  
+  // Boolean property
+  isActive: true,
+  
+  // Array property
+  hobbies: ['reading', 'gaming', 'coding'],
+  
+  // Object property (nested)
+  address: {
+    street: '123 Main St',
+    city: 'NYC'
+  },
+  
+  // Function property (method)
+  greet: function() {
+    return 'Hello!';
+  },
+  
+  // Null property
+  middleName: null,
+  
+  // Undefined property
+  nickname: undefined
+};
+
+console.log(obj);
+```
+
+### Key Characteristics of Objects
+
+1. **Unordered Collection** - Properties don't have a guaranteed order
+2. **Key-Value Pairs** - Each property has a name (key) and value
+3. **Mutable** - Can be modified after creation
+4. **Passed by Reference** - Objects are references, not copies
+5. **Can Contain Anything** - Methods, other objects, arrays, primitives
+6. **Dynamic** - Can add/remove properties anytime
+
+### Object vs Array
+
+```javascript
+// Object: key-value pairs (unordered)
+const person = {
+  name: 'John',      // key: 'name', value: 'John'
+  age: 30,           // key: 'age', value: 30
+  email: 'john@ex.com'
+};
+
+// Array: indexed list (ordered)
+const fruits = ['apple', 'banana', 'orange'];
+// Index 0: 'apple'
+// Index 1: 'banana'
+// Index 2: 'orange'
+
+// Arrays are actually objects!
+console.log(typeof person);  // 'object'
+console.log(typeof fruits);  // 'object'
+console.log(Array.isArray(fruits)); // true
+```
+
+---
+
 ## Table of Contents
 
 1. [Object Inspection Methods](#object-inspection-methods) - Methods to inspect object structure
